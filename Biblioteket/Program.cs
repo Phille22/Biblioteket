@@ -10,6 +10,9 @@ namespace Biblioteket
     {
         static void Main(string[] args)
         {
+            Function f = new Function();
+            var bookList = f.createList();
+            f.showList(bookList);
         }
     }
 }

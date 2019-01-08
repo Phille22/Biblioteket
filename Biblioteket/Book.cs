@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 // DONE: Barnböcker: Åldersgräns, Bilderbok (Ja/Nej)
 // DONE: Faktaböcker: Ämne (historia, teknik, etc.)
 // DONE: Attribut: Gemensamma: Titel, Författare, Antal exemplar i hyllan
-// TODO: Funktion för att låna ut och lämna tillbaka bok
+// DONE: Funktion för att låna ut och lämna tillbaka bok
 // TODO: Bokobjekt i separat fil
 
 namespace Biblioteket

@@ -9,11 +9,11 @@ namespace Biblioteket
     class Function
     {
         //Funktion som skapar listan med böcker
-        public List<Book> createList()
+        public static List<Book> createList()
         {
             var books = new List<Book>();
-            books.Add(new Roman { Title = "Roman1", Author = "Author1", AvailableBooks = 3, Borrowed = 0, DateOfRelease = "21/9-18", Language = "Svenska" });
-            books.Add(new Roman { Title = "Roman2", Author = "Author2", AvailableBooks = 4, Borrowed = 0, DateOfRelease = "20/6-18", Language = "English" });
+            books.Add(new Roman { Title = "Roman1", Author = "Author1", AvailableBooks = 3, Borrowed = 0, DateOfRelease = new DateTime (2018, 09, 21), Language = "Svenska" });
+            books.Add(new Roman { Title = "Roman2", Author = "Author2", AvailableBooks = 4, Borrowed = 0, DateOfRelease = new DateTime (2018, 06, 20), Language = "English" });
             books.Add(new Child { Title = "Child1", Author = "Author3", AvailableBooks = 0, Borrowed = 0, AgeRating = 5, hasPictures = true });
             books.Add(new Child { Title = "Child2", Author = "Author4", AvailableBooks = 2, Borrowed = 0, AgeRating = 8, hasPictures = false });
             books.Add(new Fact { Title = "Fact1", Author = "Author5", AvailableBooks = 3, Borrowed = 0, Subject = "Geofrafi" });
@@ -21,12 +21,12 @@ namespace Biblioteket
             return books;
         }
         //Funktion som visar boklistan
-        public void showList(List<Book> bookList)
+        public static void showList(List<Book> bookList)
         {
             string description = "";
-            int numberOfBooks = 0;
+            int numberOfBooks = 0; //Räkna antal böcker i biblioteket
             int bookNumber = 0;
-            int numberOfBorrowedBooks = 0;
+            int numberOfBorrowedBooks = 0; //Räkna antal lånade böcker från biblioteket
             foreach (var Book in bookList)
             {
                 if(Book is Roman)
@@ -48,72 +48,66 @@ namespace Biblioteket
                     numberOfBorrowedBooks = numberOfBorrowedBooks + Book.Borrowed;
                 }
                 bookNumber++;
-                Console.WriteLine(bookNumber + ". Titel: " + Book.Title + " Författare: " + Book.Author + " Tillgängliga böcker: " + Book.AvailableBooks + description + "\r\n");
+                Console.WriteLine(bookNumber + ". Titel: " + Book.Title + " Författare: " + Book.Author + " Tillgängliga böcker: " + Book.AvailableBooks + description + "\r\n"); //Kan förenklas
             }
             Console.WriteLine("Antal tillgängliga böcker: " + numberOfBooks);
             Console.WriteLine("Antal utlånade böcker: " + numberOfBorrowedBooks + "\r\n");
             Console.WriteLine("Tryck på L för att låna en bok\r\nTryck på R för att lämna tillbaka en bok");
             alternative(bookList);
         }
-        //Funktion för att välja om man ska lämna tillbaka eller låna en bok
-        public List<Book> alternative(List<Book> bookList)
+        //Funktion för att välja om man ska lämna tillbaka eller låna en bok (Gör om till switch)
+        public static List<Book> alternative(List<Book> bookList)
         {
             ConsoleKeyInfo letter = Console.ReadKey();
             if (letter.KeyChar == 'r')
             {
-                ReturnBook(bookList);
-                return bookList;
+                ReturnBook(bookList); //Kör funktionen för att lämna tillbaka en bok
             }
             if (letter.KeyChar == 'l')
             {
-                BorrowBook(bookList);
-                return bookList;
+                BorrowBook(bookList); //Kör funktionen för att låna en bok
             }
             else
             {
                 showList(bookList);
-                return bookList;
             }
+            return bookList;
         }
         //Funktion för att låna en bok
-        public List<Book> BorrowBook(List<Book> bookList)
+        public static List<Book> BorrowBook(List<Book> bookList)
         {
                 Console.WriteLine("\r\nVälj bok att låna (1-6)");
                 ConsoleKeyInfo letter = Console.ReadKey();
                 if(bookList[int.Parse(letter.KeyChar.ToString()) - 1].AvailableBooks == 0)
                 {
                     Console.WriteLine("\r\nDu kan inte låna den boken!\r\n");
-                showList(bookList);
-                    return bookList;
                 }
                 else
                 {
                     Console.WriteLine("\r\nDu lånade: " + bookList[int.Parse(letter.KeyChar.ToString()) - 1].Title + "\r\n");
                     bookList[int.Parse(letter.KeyChar.ToString()) - 1].AvailableBooks--;
                     bookList[int.Parse(letter.KeyChar.ToString()) - 1].Borrowed++;
-                    showList(bookList);
-                    return bookList;
                 }
-        }
+                showList(bookList);
+                return bookList;
+        }           
         //Funktion för att lämna tillbaka en bok
-        public List<Book> ReturnBook(List<Book> bookList)
+        public static List<Book> ReturnBook(List<Book> bookList)
         {
             Console.WriteLine("\r\nVälj bok att lämna tillbaka (1-6)");
             ConsoleKeyInfo letter = Console.ReadKey();
             if (bookList[int.Parse(letter.KeyChar.ToString()) - 1].Borrowed == 0)
             {
                 Console.WriteLine("\r\nAlla exemplar är redan återlämnade!\r\n");
-                showList(bookList);
-                return bookList;
             }
             else
             {
                 Console.WriteLine("\r\nDu lämnade tillbaka: " + bookList[int.Parse(letter.KeyChar.ToString()) - 1].Title + "\r\n");
                 bookList[int.Parse(letter.KeyChar.ToString()) - 1].AvailableBooks++;
                 bookList[int.Parse(letter.KeyChar.ToString()) - 1].Borrowed--;
-                showList(bookList);
-                return bookList;
             }
+            showList(bookList);
+            return bookList;
         }
     }
 }

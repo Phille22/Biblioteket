@@ -24,7 +24,7 @@ namespace Biblioteket
 
     class Roman : Book
     {
-        public string DateOfRelease { get; set; }
+        public DateTime DateOfRelease { get; set; }
         public string Language { get; set; }
     }
 

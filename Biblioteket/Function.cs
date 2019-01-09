@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Biblioteket
 {
@@ -25,37 +26,31 @@ namespace Biblioteket
         {
             string description = "";
             int numberOfBooks = 0; //Räkna antal böcker i biblioteket
-            int bookNumber = 0;
+            int bookNumber = 0; //Bokens placering i listan
             int numberOfBorrowedBooks = 0; //Räkna antal lånade böcker från biblioteket
-            foreach (var Book in bookList)
+            foreach (var Book in bookList) //Kollar vilken typ av bok det är och ger den rätt beskrivning
             {
                 if(Book is Roman)
                 {
                     description = " Utgivningdatum: " + ((Roman)Book).DateOfRelease + " Språk: " + ((Roman)Book).Language;
-                    numberOfBooks = numberOfBooks + Book.AvailableBooks;
-                    numberOfBorrowedBooks = numberOfBorrowedBooks + Book.Borrowed;
                 }
                 if(Book is Child)
                 {
                     description = " Ålder: " + ((Child)Book).AgeRating + " Bilderbok: " + ((Child)Book).hasPictures;
-                    numberOfBooks = numberOfBooks + Book.AvailableBooks;
-                    numberOfBorrowedBooks = numberOfBorrowedBooks + Book.Borrowed;
                 }
                 if(Book is Fact)
                 {
                     description = " Ämne: " + ((Fact)Book).Subject;
-                    numberOfBooks = numberOfBooks + Book.AvailableBooks;
-                    numberOfBorrowedBooks = numberOfBorrowedBooks + Book.Borrowed;
                 }
+                numberOfBooks = numberOfBooks + Book.AvailableBooks;
+                numberOfBorrowedBooks = numberOfBorrowedBooks + Book.Borrowed;
                 bookNumber++;
                 Console.WriteLine(bookNumber + ". Titel: " + Book.Title + " Författare: " + Book.Author + " Tillgängliga böcker: " + Book.AvailableBooks + description + "\r\n"); //Kan förenklas
             }
-            Console.WriteLine("Antal tillgängliga böcker: " + numberOfBooks);
-            Console.WriteLine("Antal utlånade böcker: " + numberOfBorrowedBooks + "\r\n");
-            Console.WriteLine("Tryck på L för att låna en bok\r\nTryck på R för att lämna tillbaka en bok");
+            Console.WriteLine("Antal tillgängliga böcker: " + numberOfBooks + "\r\n" + "Antal utlånade böcker: " + numberOfBorrowedBooks + "\r\n\r\nTryck på L för att låna en bok\r\nTryck på R för att lämna tillbaka en bok");
             alternative(bookList);
         }
-        //Funktion för att välja om man ska lämna tillbaka eller låna en bok (Gör om till switch)
+        //Funktion för att välja om man ska lämna tillbaka eller låna en bok (Gör om till switch?)
         public static List<Book> alternative(List<Book> bookList)
         {
             ConsoleKeyInfo letter = Console.ReadKey();
@@ -88,6 +83,7 @@ namespace Biblioteket
                     bookList[int.Parse(letter.KeyChar.ToString()) - 1].AvailableBooks--;
                     bookList[int.Parse(letter.KeyChar.ToString()) - 1].Borrowed++;
                 }
+                SaveData(bookList);
                 showList(bookList);
                 return bookList;
         }           
@@ -106,8 +102,47 @@ namespace Biblioteket
                 bookList[int.Parse(letter.KeyChar.ToString()) - 1].AvailableBooks++;
                 bookList[int.Parse(letter.KeyChar.ToString()) - 1].Borrowed--;
             }
+            SaveData(bookList);
             showList(bookList);
             return bookList;
+        }
+        //Funktion för att spara data
+        public static bool SaveData(List<Book> bookList)
+        {
+            string fileName = "library.json";
+
+            var settings = new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.Objects,
+                Formatting = Formatting.Indented
+            };
+
+            string json = JsonConvert.SerializeObject(bookList.ToArray(), settings);
+            System.IO.File.WriteAllText(@"..\..\storage\" + fileName, json);
+
+            return true;
+        }
+        //Funktion för att hämta data
+        public static List<Book> GetData()
+        {
+            string fileName = "library.json";
+            string filepath = @"..\..\storage\" + fileName;
+
+            List<Book> data;
+            if (System.IO.File.Exists(filepath))
+            {
+                var settings = new JsonSerializerSettings()
+                {
+                    TypeNameHandling = TypeNameHandling.Objects
+                };
+                var json = System.IO.File.ReadAllText(filepath);
+                data = JsonConvert.DeserializeObject<List<Book>>(json, settings);
+            }
+            else
+            {
+                data = createList();
+            }
+            return data;
         }
     }
 }

@@ -10,8 +10,8 @@ namespace Biblioteket
     {
         static void Main(string[] args)
         {
-            List<Book> Books = Function.createList();
-            Function.showList(Books);            
+            List<Book> Books = Function.GetData();
+            Function.showList(Books);
         }
     }
 }

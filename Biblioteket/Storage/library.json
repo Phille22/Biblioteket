@@ -1,0 +1,89 @@
+[
+  {
+    "$type": "Biblioteket.Roman, Biblioteket",
+    "DateOfRelease": "2018-09-21T00:00:00",
+    "Language": "Svenska",
+    "Title": "Roman1",
+    "Author": "Author1",
+    "AvailableBooks": 3,
+    "Borrowed": 0
+  },
+  {
+    "$type": "Biblioteket.Roman, Biblioteket",
+    "DateOfRelease": "2018-06-20T00:00:00",
+    "Language": "English",
+    "Title": "Roman2",
+    "Author": "Author2",
+    "AvailableBooks": 4,
+    "Borrowed": 0
+  },
+  {
+    "$type": "Biblioteket.Child, Biblioteket",
+    "AgeRating": 5,
+    "hasPictures": true,
+    "Title": "Child1",
+    "Author": "Author3",
+    "AvailableBooks": 0,
+    "Borrowed": 0
+  },
+  {
+    "$type": "Biblioteket.Child, Biblioteket",
+    "AgeRating": 8,
+    "hasPictures": false,
+    "Title": "Child2",
+    "Author": "Author4",
+    "AvailableBooks": 2,
+    "Borrowed": 0
+  },
+  {
+    "$type": "Biblioteket.Fact, Biblioteket",
+    "Subject": "Geofrafi",
+    "Title": "Fact1",
+    "Author": "Author5",
+    "AvailableBooks": 3,
+    "Borrowed": 0
+  },
+  {
+    "$type": "Biblioteket.Fact, Biblioteket",
+    "Subject": "Teknik",
+    "Title": "Fact2",
+    "Author": "Author6",
+    "AvailableBooks": 4,
+    "Borrowed": 0
+  },
+  {
+    "$type": "Biblioteket.Roman, Biblioteket",
+    "DateOfRelease": "2018-09-21T00:00:00",
+    "Language": "Svenska",
+    "Title": "abc",
+    "Author": "def",
+    "AvailableBooks": 3,
+    "Borrowed": 0
+  },
+  {
+    "$type": "Biblioteket.Roman, Biblioteket",
+    "DateOfRelease": "2018-09-23T00:00:00",
+    "Language": "svenska",
+    "Title": "abc",
+    "Author": "ghj",
+    "AvailableBooks": 1,
+    "Borrowed": 0
+  },
+  {
+    "$type": "Biblioteket.Roman, Biblioteket",
+    "DateOfRelease": "2018-12-12T00:00:00",
+    "Language": "ethui",
+    "Title": "gj",
+    "Author": "jkk",
+    "AvailableBooks": 5,
+    "Borrowed": 0
+  },
+  {
+    "$type": "Biblioteket.Fact, Biblioteket",
+    "Subject": "historia",
+    "Title": "hdkd",
+    "Author": "dasds",
+    "AvailableBooks": 2,
+    "Borrowed": 0
+  }
+]

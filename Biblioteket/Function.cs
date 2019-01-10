@@ -47,9 +47,9 @@ namespace Biblioteket
                 bookNumber++;
                 Console.WriteLine(bookNumber + ". Titel: " + Book.Title + " Författare: " + Book.Author + " Tillgängliga böcker: " + Book.AvailableBooks + description + "\r\n"); //Kan förenklas
             }
-            Console.WriteLine("Antal tillgängliga böcker: " + numberOfBooks + "\r\n" + "Antal utlånade böcker: " + numberOfBorrowedBooks + "\r\n\r\nTryck på L för att låna en bok\r\nTryck på R för att lämna tillbaka en bok");
+            Console.WriteLine("Antal tillgängliga böcker: " + numberOfBooks + "\r\n" + "Antal utlånade böcker: " + numberOfBorrowedBooks + "\r\n\r\nTryck på L för att låna en bok\r\nTryck på R för att lämna tillbaka en bok\r\nTryck på N för att lägga till en ny bok");
             alternative(bookList);
-        }
+        } 
         //Funktion för att välja om man ska lämna tillbaka eller låna en bok (Gör om till switch?)
         public static List<Book> alternative(List<Book> bookList)
         {
@@ -61,6 +61,10 @@ namespace Biblioteket
             if (letter.KeyChar == 'l')
             {
                 BorrowBook(bookList); //Kör funktionen för att låna en bok
+            }
+            if (letter.KeyChar == 'n')
+            {
+                AddBook();
             }
             else
             {
@@ -143,6 +147,44 @@ namespace Biblioteket
                 data = createList();
             }
             return data;
+        }
+
+
+        public static void AddBook()
+        {
+            List<Book> Books = GetData();
+            Console.WriteLine("Ange typ av bok (r/c/f):");
+            string bookType = Console.ReadLine();
+            Console.WriteLine("Ange titel:");
+            string title = Console.ReadLine();
+            Console.WriteLine("Ange Författare");
+            string author = Console.ReadLine();
+            Console.WriteLine("Hur många böcker vill du lägga till?");
+            int availablebooks = int.Parse(Console.ReadLine());
+            if (bookType == "r")
+            {
+                Console.WriteLine("Ange bokens utgivningsdatum:");
+                DateTime dateofrelease = System.DateTime.Parse(Console.ReadLine());
+                Console.WriteLine("Ange språk:");
+                string language = Console.ReadLine();
+                Books.Add(new Roman { Title = title, Author = author, AvailableBooks = availablebooks, Borrowed = 0, DateOfRelease = dateofrelease, Language = language });
+            }
+            if (bookType == "c")
+            {
+                Console.WriteLine("Ange bokens åldersgräns:");
+                int agerating = int.Parse(Console.ReadLine());
+                Console.WriteLine("Har boken bilder? (true/false");
+                bool haspictures = bool.Parse(Console.ReadLine());
+                Books.Add(new Child { Title = title, Author = author, AvailableBooks = availablebooks, Borrowed = 0, AgeRating = agerating, hasPictures = haspictures });
+            }
+            if (bookType == "f")
+            {
+                Console.WriteLine("Ange ämne: ");
+                string subject = Console.ReadLine();
+                Books.Add(new Fact { Title = title, Author = author, AvailableBooks = availablebooks, Borrowed = 0, Subject = subject });
+            }
+            SaveData(Books);
+            showList(Books);
         }
     }
 }

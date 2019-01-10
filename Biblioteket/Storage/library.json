@@ -5,8 +5,8 @@
     "Language": "Svenska",
     "Title": "Roman1",
     "Author": "Author1",
-    "AvailableBooks": 3,
-    "Borrowed": 0
+    "AvailableBooks": 2,
+    "Borrowed": 1
   },
   {
     "$type": "Biblioteket.Roman, Biblioteket",
@@ -84,6 +84,15 @@
     "Title": "hdkd",
     "Author": "dasds",
     "AvailableBooks": 2,
+    "Borrowed": 0
+  },
+  {
+    "$type": "Biblioteket.Roman, Biblioteket",
+    "DateOfRelease": "1980-04-21T00:00:00",
+    "Language": "svenska",
+    "Title": "hi",
+    "Author": "pelle",
+    "AvailableBooks": 1,
     "Borrowed": 0
   }
 ]

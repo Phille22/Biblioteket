@@ -18,7 +18,7 @@ namespace Biblioteket
             books.Add(new Child { Title = "Child1", Author = "Author3", AvailableBooks = 0, Borrowed = 0, AgeRating = 5, hasPictures = true });
             books.Add(new Child { Title = "Child2", Author = "Author4", AvailableBooks = 2, Borrowed = 0, AgeRating = 8, hasPictures = false });
             books.Add(new Fact { Title = "Fact1", Author = "Author5", AvailableBooks = 3, Borrowed = 0, Subject = "Geofrafi" });
-            books.Add(new Fact { Title = "Fact2", Author = "Author6", AvailableBooks = 4, Borrowed = 0, Subject = "Teknik" });
+            books.Add(new Fact { Title = "Fact2", Author = "Author6", AvailableBooks = 4, Borrowed = 0, Subject = "Teknik", });
             return books;
         }
         //Funktion som visar boklistan

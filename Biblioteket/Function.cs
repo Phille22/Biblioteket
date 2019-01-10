@@ -148,8 +148,7 @@ namespace Biblioteket
             }
             return data;
         }
-
-
+        //Funktion för att lägga till nya böcker
         public static void AddBook()
         {
             List<Book> Books = GetData();
